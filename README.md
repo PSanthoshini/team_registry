@@ -1,70 +1,40 @@
-# Getting Started with Create React App
+# Team Member Registry
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Clean and simple way to manage our team members. I built this with a "config-first" approach, so we can add new data fields (like departments or roles) in seconds without touching the core UI components.
 
-## Available Scripts
+## Getting Started
 
-In the project directory, you can run:
+First, install the goods:
+npm install
 
-### `npm start`
+Then fire it up:
+npm run dev
+Note: This command starts both the React frontend (port 3000) and the local mock database (port 3001) at once.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## How to add new fields
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+If you need to track something new (like a Slack handle or a Department), you don't need to go digging through the JSX. Just:
 
-### `npm test`
+1. Open `src/config/formConfig.js`
+2. Drop a new field object into the array.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Example:
+{
+    name: 'department',
+    label: 'Department',
+    type: 'text',
+    required: true,
+    validation: {
+        pattern: /^[a-zA-Z\s]+$/,
+        message: 'Only letters, please'
+    }
+}
 
-### `npm run build`
+The form and the table will both update themselves automatically.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## A few notes on the design
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+* Config-Driven UI: I wanted to keep the components as "dumb" as possible. The app just reads the schema and renders what it's told. 
+* Separation of Concerns: Logic is handled in the main container, the form is its own thing for rendering, and API calls are tucked away in a service file. 
+* MUI and Styling: Used Material-UI for the heavy lifting so it looks professional and handles mobile users properly without me writing a ton of custom CSS. 
+* Mock Backend: Since there isn't a "real" database yet, I'm using `json-server`. It's great for local testing because it mimics a real REST API.
