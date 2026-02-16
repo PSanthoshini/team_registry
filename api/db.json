@@ -26,6 +26,13 @@
       "email": "michael.j@example.com",
       "dateOfBirth": "1985-11-30",
       "address": "789 Pine Rd, Chicago"
+    },
+    {
+      "id": "96c2",
+      "firstName": "Santhoshini",
+      "lastName": "Potnuru",
+      "phoneNumber": "8309804089",
+      "email": "santhoshini27c@gmail.com"
     }
   ]
 }
